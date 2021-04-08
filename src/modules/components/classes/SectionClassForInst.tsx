@@ -80,7 +80,8 @@ function EachClass(props: RouteComponentProps<RouteParamsProps>) {
     useEffect(() => {
         if (classroom === initial) {
             const currentClassroomState = async (): Promise<ClassroomInstProps[]> => {
-                return await axios.get<ClassroomInstProps[]>('http://localhost:7777/api/token/')
+                return await axios.get<ClassroomInstProps[]>('http://isel.lifove.net/api/token/')
+                //return await axios.get<ClassroomInstProps[]>('/api/token/')
                 .then((response) => {
                     return response.data
                 });
@@ -91,7 +92,7 @@ function EachClass(props: RouteComponentProps<RouteParamsProps>) {
                 setClassroom(response.find(element => element.itoken === props.match.params.token) || initial);
                 
                 if (response.find(element => element.itoken === props.match.params.token) === undefined) {
-                    props.history.push('/');
+                    props.history.push('/jchecker');
                     alert("클래스가 없습니다.😅");
                 }
             })
@@ -109,9 +110,9 @@ function EachClass(props: RouteComponentProps<RouteParamsProps>) {
                         underline="none"
                         color="inherit"
                         className={classesStyle.title}
-                        href="/"
+                        href="/jchecker"
                     >
-                        <img src="/static/logo.png" alt="logo" className={classesStyle.logo} />
+                        <img src="/assets/logo.png" alt="logo" className={classesStyle.logo} />
                     </Link>
                 </Toolbar>
             </AppBar>

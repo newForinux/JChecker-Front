@@ -95,7 +95,7 @@ function AppFooter() {
                         justify="flex-start"
                         className={classes.iconsWrapperSecondary}
                     >
-                        <img src="/static/logo.png" alt="logo" className={classes.logoIcons}/>
+                        <img src="/assets/logo.png" alt="logo" className={classes.logoIcons}/>
                     </Grid>
                     
                     <Grid item>
@@ -119,12 +119,12 @@ function AppFooter() {
                         <Grid container direction="row" justify="flex-start">
                             <Grid item className={classes.icons}>
                                 <a href="https://github.com/newForinux" className={classes.icons}>
-                                    <img src="/static/github.svg" alt="Github" />
+                                    <img src="/assets/github.svg" alt="Github" />
                                 </a>
                             </Grid>
                             <Grid item className={classes.icons}>
                                 <a href="https://github.com/Yessir-kim" className={classes.icons}>
-                                    <img src="/static/github.svg" alt="Github" />
+                                    <img src="/assets/github.svg" alt="Github" />
                                 </a>
                             </Grid>
                         </Grid>
@@ -134,10 +134,10 @@ function AppFooter() {
                 <Grid item>
                     <Grid container direction="row" justify="flex-start">
                         <Grid item className={classes.backgroundIcons}>
-                            <img src="/static/hand.png" alt="Handong" className={classes.backgroundIcons}/>
+                            <img src="/assets/hand.png" alt="Handong" className={classes.backgroundIcons}/>
                         </Grid>
                         <Grid item className={classes.backgroundIcons}>
-                            <img src="/static/ISEL-t.png" alt="ISEL" className={classes.labIcons}/>
+                            <img src="/assets/ISEL-t.png" alt="ISEL" className={classes.labIcons}/>
                         </Grid>
                     </Grid>
                     <Typographic variant="caption" gutterBottom>

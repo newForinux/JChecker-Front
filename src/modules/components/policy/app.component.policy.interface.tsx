@@ -29,12 +29,14 @@ export default function InterfaceDialog(props: DialogRawProp) {
     
     const [open, setOpen] = useState(isOpen);
     const [fields, setFields] = useState(["itf-0"]);
-    const [required, setRequired] = useState([""]);
+    const [originClass, setOrigins] = useState([""]);
+    const [interfaces, setInterfaces] = useState([""]);
     const [deduct, setDeduct] = useState(0);
     const [max_deduct, setMax_deduct] = useState(0);
     const [resItf, setResItf] = useState({
         state: false,
-        required: [] as string[],
+        origins: [] as string[],
+        inherit: [] as string[],
         deductPoint : 0,
         maxDeduct: 0
     });
@@ -65,17 +67,26 @@ export default function InterfaceDialog(props: DialogRawProp) {
     },[resItf]);
 
 
-    const handleRequiredChange = (index : number) => (e : React.ChangeEvent<HTMLInputElement>) => {
-        let newArr = [...required];
+    const handleOriginChange = (index : number) => (e : React.ChangeEvent<HTMLInputElement>) => {
+        let newArr = [...originClass];
         newArr[index] = e.target.value;
-        setRequired(newArr);
+        setOrigins(newArr);
     }
+
+
+    const handleInterfaceChange = (index : number) => (e : React.ChangeEvent<HTMLInputElement>) => {
+        let newArr = [...interfaces];
+        newArr[index] = e.target.value;
+        setInterfaces(newArr);
+    }
+
 
 
     const handleClose = () => {
         setResItf({
             state: false,
-            required: [],
+            origins: [],
+            inherit: [],
             deductPoint : 0,
             maxDeduct: 0
         });
@@ -86,7 +97,8 @@ export default function InterfaceDialog(props: DialogRawProp) {
     const handleResIO = () => {
         setResItf({
             state: true,
-            required: required,
+            origins: originClass,
+            inherit: interfaces,
             deductPoint : deduct,
             maxDeduct: max_deduct
         });
@@ -101,6 +113,7 @@ export default function InterfaceDialog(props: DialogRawProp) {
                 onClose={handleClose}
                 aria-labelledby="form-dialog-itf"
                 maxWidth="md"
+                fullWidth={true}
                 scroll='paper'
                 disableEscapeKeyDown
         >
@@ -139,18 +152,32 @@ export default function InterfaceDialog(props: DialogRawProp) {
             </Grid>
 
             {fields.map((input, index) => (
-                <Grid xs={12} container spacing={1} item key={index}>
-                    <Grid xs={12} item>
-                        <FormControl margin="normal">
+                <Grid container spacing={1} key={index}>
+                    <Grid xs item>
+                        <FormControl fullWidth margin="normal">
                             <TextField
-                                value={required[index] || ""}
+                                value={originClass[index] || ""}
+                                variant="outlined"
+                                id={"org-" + index}
+                                label={t('Inherited class name')}
+                                name={"org-" + index}
+                                size="medium"
+                                className="iorg"
+                                onChange={handleOriginChange(index)}
+                            />
+                        </FormControl>
+                    </Grid>
+                    <Grid xs item>
+                        <FormControl fullWidth margin="normal">
+                            <TextField
+                                value={interfaces[index] || ""}
                                 variant="outlined"
                                 id={"itf-" + index}
                                 label={t('interface name')}
                                 name={"itf-" + index}
                                 size="medium"
                                 className="itf"
-                                onChange={handleRequiredChange(index)}
+                                onChange={handleInterfaceChange(index)}
                             />
                         </FormControl>
                     </Grid>

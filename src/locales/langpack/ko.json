@@ -46,7 +46,9 @@
 
     "dialog.1": "채점 기준",
     "dialog.2": "정적 분석을 통해 검사할 항목을 선택할 수 있습니다.",
-
+    "check.again.1": "채점 기준이 저장되었습니다!",
+    "check.again.2": "혹시 토큰을 잊으셨다면, 한 번 더 확인하세요!",
+    
     "policy.point": "총점",
     "policy.count.methods": "최소 메서드 개수",
     "policy.count.fields": "최소 필드 개수",
@@ -88,7 +90,21 @@
     "begin.getting start": "지금 시작하세요.",
     "begin.enter token": "인증 토큰을 입력해",
     "begin.enter token rest": "현재 열린 클래스에 입장합니다.",
-    "begin.enter generate pre": "클래스를 운영하고 싶으신가요?",
-    "begin.enter generate token": "인증 토큰을 발행",
-    "begin.enter generate rest": "할 수 있습니다."
+    "begin.enter generate contact": "클래스를 운영하고 싶으신가요? JCHECKER팀에게 연락 주세요!", 
+
+    "result.score.success": "채점 완료!",
+    "result.score.count": "지정된 필드, 메서드 개수 또는 (필요하다면) enhanced for문이 부족한 것 같습니다.",
+    "result.score.class": "클래스 : 지정된 클래스가 없습니다.",
+    "result.score.compile": "컴파일 : 컴파일에 문제가 있습니다.",
+    "result.score.testcase": "테스트 케이스 : 틀렸습니다. 여러 테스트 케이스를 만들어 다시 확인해보세요.",
+    "result.score.package": "패키지 : 패키지 경로가 올바르지 않습니다.",
+    "result.score.customexc": "사용자 지정 예외처리 클래스 : 해당 클래스가 없거나 사용되지 않았습니다.",
+    "result.score.customstr": "사용자 지정 자료구조 클래스 : 해당 클래스가 없거나 사용되지 않았습니다.",
+    "result.score.interface": "인터페이스 : 지정된 인터페이스를 상속하지 않았습니다.",
+    "result.score.superclass": "슈퍼클래스 : 지정된 슈퍼클래스를 상속하지 않았습니다.",
+    "result.score.overriding": "오버라이딩 : 상위 클래스의 메서드를 재정의하지 않았습니다.",
+    "result.score.overloading": "오버로딩 : 오버로딩이 적용된 메서드가 없습니다.",
+    "result.score.thread": "스레드 : 스레드가 구현되지 않은 것 같습니다.",
+    "result.score.javadoc": "자바독 : 자바독이 부족하거나, 작성되지 않은 것 같습니다.",
+    "result.score.encap": "캡슐화 : 캡슐화가 적용되지 않은 클래스가 발견되었습니다."
 }

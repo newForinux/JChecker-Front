@@ -49,18 +49,18 @@ function AppBarView (props: Props) {
                         variant="h3"
                         underline="none"
                         color="inherit"
-                        href="/"
+                        href="/jchecker"
                     >
-                        <img src="/static/logo.png" alt="logo" className={classes.logo} />
+                        <img src="/assets/logo.png" alt="logo" className={classes.logo} />
 
                     </Link>
 
                     <div className={classes.right}>
                         <Button className={classes.langIcon} onClick={() => handleChangeLang('ko')}>
-                            <img src="/static/kor.svg" alt="kor" />
+                            <img src="/assets/kor.svg" alt="kor" />
                         </Button>
                         <Button className={classes.langIcon} onClick={() => handleChangeLang('en')}>
-                            <img src="/static/eng.svg" alt="eng" />
+                            <img src="/assets/eng.svg" alt="eng" />
                         </Button>
                     </div>
                     

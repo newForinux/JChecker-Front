@@ -30,12 +30,14 @@ export default function SuperclassDialog(props: DialogRawProp) {
     
     const [open, setOpen] = useState(isOpen);
     const [fields, setFields] = useState(["spc-0"]);
-    const [required, setRequired] = useState([""]);
+    const [originClass, setOriginClass] = useState([""]);
+    const [superclass, setSuperclass] = useState([""]);
     const [deduct, setDeduct] = useState(0);
     const [max_deduct, setMax_deduct] = useState(0);
     const [resSpc, setResSpc] = useState({
         state: false,
-        required: [] as string[],
+        origins: [] as string[],
+        inherit: [] as string[],
         deductPoint : 0,
         maxDeduct: 0
     });
@@ -65,17 +67,25 @@ export default function SuperclassDialog(props: DialogRawProp) {
     },[resSpc]);
 
     
-    const handleRequiredChange = (index : number) => (e : React.ChangeEvent<HTMLInputElement>) => {
-        let newArr = [...required];
+    const handleOriginChange = (index : number) => (e : React.ChangeEvent<HTMLInputElement>) => {
+        let newArr = [...originClass];
         newArr[index] = e.target.value;
-        setRequired(newArr);
+        setOriginClass(newArr);
     }
     
+    const handleSuperChange = (index : number) => (e : React.ChangeEvent<HTMLInputElement>) => {
+        let newArr = [...superclass];
+        newArr[index] = e.target.value;
+        setSuperclass(newArr);
+    }
+
+
 
     const handleClose = () => {
         setResSpc({
             state: false,
-            required: [],
+            origins: [],
+            inherit: [],
             deductPoint : 0,
             maxDeduct: 0
         });
@@ -86,7 +96,8 @@ export default function SuperclassDialog(props: DialogRawProp) {
     const handleResIO = () => {
         setResSpc({
             state: true,
-            required: required,
+            origins: originClass,
+            inherit: superclass,
             deductPoint : deduct,
             maxDeduct: max_deduct
         });
@@ -97,13 +108,10 @@ export default function SuperclassDialog(props: DialogRawProp) {
     return (
         <Dialog 
                 open={open}
-                onClose={(event, reason) => {
-                    if (reason !== 'backdropClick') {
-                        handleClose();
-                    }
-                }}
+                onClose={handleClose}
                 aria-labelledby="form-dialog-spc"
                 maxWidth="md"
+                fullWidth={true}
                 scroll='paper'
                 disableEscapeKeyDown
         >
@@ -142,18 +150,32 @@ export default function SuperclassDialog(props: DialogRawProp) {
             </Grid>
 
             {fields.map((input, index) => (
-                <Grid xs={12} container spacing={1} item key={index}>
-                    <Grid xs={12} item>
-                        <FormControl margin="normal">
+                <Grid container spacing={1} key={index}>
+                    <Grid xs item>
+                        <FormControl fullWidth margin="normal">
                             <TextField
-                                value={required[index] || ""}
+                                value={originClass[index] || ""}
+                                variant="outlined"
+                                id={"sorg-" + index}
+                                label={t('Inherited class name')}
+                                name={"sorg-" + index}
+                                size="medium"
+                                className="sorg"
+                                onChange={handleOriginChange(index)}
+                            />
+                        </FormControl>
+                    </Grid>
+                    <Grid xs item>
+                        <FormControl fullWidth margin="normal">
+                            <TextField
+                                value={superclass[index] || ""}
                                 variant="outlined"
                                 id={"spc-" + index}
-                                label={t('class name')}
+                                label={t('super class name')}
                                 name={"spc-" + index}
                                 size="medium"
                                 className="spc"
-                                onChange={handleRequiredChange(index)}
+                                onChange={handleSuperChange(index)}
                             />
                         </FormControl>
                     </Grid>

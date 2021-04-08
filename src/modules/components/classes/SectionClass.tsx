@@ -88,6 +88,7 @@ function SectionClass(props: RouteComponentProps<RouteParamsProps>) {
     const [classroom, setClassroom] = useState(initial);
     const [studentID, setStudentID] = useState("");
     const [valid, setValid] = useState(false);
+    
 
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -95,17 +96,23 @@ function SectionClass(props: RouteComponentProps<RouteParamsProps>) {
     }
 
     
-    const handleCreate = (status: boolean) => {
-        
+    const handleCreate = (status: boolean, grading: Object) => {
         if (!status)
-            props.history.push('/error');
+            props.history.push('/jchecker/error');
+
+        else
+            props.history.push({
+                pathname: `${props.match.url}/success`,
+                state: { detail: grading },
+            });
     }
 
 
     useEffect(() => {
         if (classroom === initial) {
             const currentClassroomState = async (): Promise<ClassroomProps[]> => {
-                return await axios.get<ClassroomProps[]>('http://localhost:7777/api/token/')
+                return await axios.get<ClassroomProps[]>('http://isel.lifove.net/api/token/')
+                //return await axios.get<ClassroomProps[]>('/api/token/')
                 .then((response) => {
                     return response.data
                 });
@@ -116,14 +123,14 @@ function SectionClass(props: RouteComponentProps<RouteParamsProps>) {
                 setClassroom(response.find(element => element.token === props.match.params.token) || initial);
                 
                 if (response.find(element => element.token === props.match.params.token) === undefined) {
-                    props.history.push('/');
+                    props.history.push('/jchecker');
                     alert("클래스가 없습니다.😅");
                 } else {
                     setValid(true);
                 }
             })
             .catch(response => {
-                props.history.push('/error');
+                props.history.push('/jchecker/error');
             })
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -139,9 +146,9 @@ function SectionClass(props: RouteComponentProps<RouteParamsProps>) {
                         underline="none"
                         color="inherit"
                         className={classesStyle.title}
-                        href="/"
+                        href="/jchecker"
                     >
-                        <img src="/static/logo.png" alt="logo" className={classesStyle.logo} />
+                        <img src="/assets/logo.png" alt="logo" className={classesStyle.logo} />
                     </Link>
                 </Toolbar>
             </AppBar>
@@ -164,8 +171,6 @@ function SectionClass(props: RouteComponentProps<RouteParamsProps>) {
                     placeholder={t('studentNum.placeholder')} 
                     margin="normal" 
                 />
-
-
                 {valid &&
                     <FileUploadComponent name={classroom.token} id={studentID} onCreate={handleCreate} />
                 }

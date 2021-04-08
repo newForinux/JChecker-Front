@@ -3,6 +3,7 @@ import axios from "axios";
 import produce from "immer";
 
 import React, { useState } from "react";
+import Typographic from './CTypography';
 import { useTranslation } from "react-i18next";
 import ClassDialog from "./policy/app.component.policy.classes";
 import CompiledDialog from "./policy/app.component.policy.compiled";
@@ -68,7 +69,7 @@ export default function SelectCond(props: PolicyProps) {
         compiled: { state: false } as Object,
         runtimeCompare: { state: false } as Object,
         classes : { state: false } as Object,
-        packages: { state: false },
+        packages: { state: false } as Object,
         customException: { state: false } as Object,
         customStructure: { state: false } as Object,
         inheritSuper: { state: false } as Object,
@@ -82,11 +83,17 @@ export default function SelectCond(props: PolicyProps) {
 
     const [open, setOpen] = useState(props.state);
     const [policy, setPolicy] = useState(initial_data);
-    const [state, setState] = useState(initial_state); 
+    const [state, setState] = useState(initial_state);
+    const [submitted, setSubmitted] = useState(false);
 
     const handleClose = () => {
         setOpen(false);
         setState(initial_state);
+    }
+
+
+    const handleSubmittedClose = () => {
+        setSubmitted(false);
     }
 
 
@@ -117,11 +124,13 @@ export default function SelectCond(props: PolicyProps) {
 
     
     const handleSubmit = () => {
-        axios.post("/api/token/save", JSON.stringify(policy, null, 2), {
+        axios.post("http://isel.lifove.net/api/token/save", JSON.stringify(policy, null, 2), {
+        //axios.post("/api/token/save", JSON.stringify(policy, null, 2), {    
             headers: {"Content-Type": 'application/json'}
         }).then((res) => {
             setOpen(false);
             setState(initial_state);
+            setSubmitted(true);
         })
 
         console.log( JSON.stringify(policy, null, 2) );
@@ -312,6 +321,42 @@ export default function SelectCond(props: PolicyProps) {
 
                 </Dialog>
             }
+
+            {submitted && 
+                <Dialog
+                    open={submitted}
+                    onClose={handleSubmittedClose}
+                    maxWidth="sm"
+                    scroll='paper'
+                >
+                    <DialogTitle id="form-dialog-title">
+                        {t('check.again.1')}
+                    </DialogTitle>
+                    <DialogContent dividers>
+                        <DialogContentText>
+                            {t('check.again.2')}
+                            <Typographic variant="h3" color="inherit">
+                                <Typographic variant="caption" color="inherit">
+                                    {t('gtoken')} <br />
+                                </Typographic>
+                                {policy.token}
+                                <br />
+                                <Typographic variant="caption" color="inherit">
+                                    {t('itoken')} <br />
+                                </Typographic>
+                                {policy.itoken}
+                            </Typographic>
+                        </DialogContentText>
+
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleSubmittedClose} color="primary">
+                            {t('closed')}
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+            }
+
         </div>
     )
 }

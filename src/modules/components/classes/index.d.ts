@@ -1,6 +1,10 @@
 export interface RouteParamsProps {
     id: string,
-    token?: string
+    token?: string,
+}
+
+export interface ClassDataProps {
+    grading?: Object,
 }
 
 

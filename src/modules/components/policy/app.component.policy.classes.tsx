@@ -22,7 +22,6 @@ const style = makeStyles({
 });
 
 
-
 export default function ClassDialog(props: DialogRawProp) {
     const { t } = useTranslation();
     const classes = style();

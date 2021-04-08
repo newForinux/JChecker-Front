@@ -46,6 +46,8 @@
 
     "dialog.1": "Grading policy",
     "dialog.2": "Select which details to examine using static analysis.",
+    "check.again.1": "Policy is successfully saved.",
+    "check.again.2": "If you forgot the token, check it out one more time!",
 
     "policy.point": "Total score",
     "policy.count.methods": "Mininum number of methods",
@@ -88,7 +90,21 @@
     "begin.getting start": "Let's Get Started!",
     "begin.enter token": "Enter the authentication token",
     "begin.enter token rest": "to enter the opened class.",
-    "begin.enter generate pre": "Would you like to open a class?",
-    "begin.enter generate token": "Generate an authentication token",
-    "begin.enter generate rest": " and distribute it!"
+    "begin.enter generate contact": "Do you want to run a class? Please contact us, JCHECKER team.", 
+
+    "result.score.success": "Scoring completed!",
+    "result.score.count": "The number of fields, methods or (if required) advanced for statements is insufficient.",
+    "result.score.class": "Class : No specified classes.",
+    "result.score.compile": "Compilation : There is a problem with the compilation.",
+    "result.score.testcase": "Test case : Wrong. Make test cases yourself and check them again.",
+    "result.score.package": "Package : Package path is not valid.",
+    "result.score.customexc": "Custom Exception Class : The class does not exist or has not been used.",
+    "result.score.customstr": "Custom Data Class : The class does not exist or has not been used.",
+    "result.score.interface": "Interface : The specified interface was not inherited.",
+    "result.score.superclass": "Superclass : The specified superclass was not inherited.",
+    "result.score.overriding": "Overriding : Methods of parent class were not overridden.",
+    "result.score.overloading": "Overloading : No methods applied overloading.",
+    "result.score.thread": "Thread : thread does not appear to be implemented.",
+    "result.score.javadoc": "Javadoc : Javadoc is insufficient or may not have been created.",
+    "result.score.encap": "Encapsulation : The class without encapsulation was found."
 }

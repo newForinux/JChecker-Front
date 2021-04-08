@@ -37,7 +37,7 @@ export default function CompiledDialog(props: DialogRawProp) {
 
 
     useEffect(() => {
-        props.onCreate("javadoc", resCom);
+        props.onCreate("compiled", resCom);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[resCom]);
 
@@ -65,7 +65,7 @@ export default function CompiledDialog(props: DialogRawProp) {
         <Dialog 
                 open={open}
                 onClose={handleClose}
-                aria-labelledby="form-dialog-jvd"
+                aria-labelledby="form-dialog-com"
                 maxWidth="sm"
                 fullWidth={true}
                 scroll='paper'

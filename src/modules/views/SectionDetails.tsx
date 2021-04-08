@@ -56,7 +56,7 @@ function SectionDetail(props: Props) {
         <section className={classes.root}>
             <Container className={classes.container}>
                 <img
-                    src="/static/hologram.png"
+                    src="assets/hologram.png"
                     className={classes.hologram}
                     alt="back hologram"
                 />
@@ -69,7 +69,7 @@ function SectionDetail(props: Props) {
                             <div className={classes.item}>
                                 <div className={classes.number}>1.</div>
                                 <img
-                                    src="/static/file_add.svg"
+                                    src="assets/file_add.svg"
                                     alt="file_add"
                                     className={classes.image}
                                 />
@@ -82,7 +82,7 @@ function SectionDetail(props: Props) {
                             <div className={classes.item}>
                                 <div className={classes.number}>2.</div>
                                 <img
-                                    src="/static/executing.svg"
+                                    src="assets/executing.svg"
                                     alt="execute"
                                     className={classes.image}
                                 />
@@ -95,7 +95,7 @@ function SectionDetail(props: Props) {
                             <div className={classes.item}>
                                 <div className={classes.number}>3.</div>
                                 <img
-                                    src="/static/diagram.svg"
+                                    src="assets/diagram.svg"
                                     alt="file_add"
                                     className={classes.image}
                                 />
