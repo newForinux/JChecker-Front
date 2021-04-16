@@ -20,6 +20,7 @@ const astyles = (theme: Theme) => ({
     },
     langIcon: {
         marginLeft: theme.spacing(2),
+        maxWidth: "48px",
     },
     left: {
         flex: 1,
