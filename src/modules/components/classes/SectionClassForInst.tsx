@@ -8,6 +8,7 @@ import Toolbar from '../Toolbar';
 import AppFooter from "../../views/Footer";
 import axios from "axios";
 import { ClassroomInstProps, RouteParamsProps } from ".";
+import SectionTable from "./SectionTable";
 
 
 
@@ -75,32 +76,80 @@ function EachClass(props: RouteComponentProps<RouteParamsProps>) {
         instructor: "",
         createDate: "",
     };
+
+
     const [classroom, setClassroom] = useState(initial);
+    const [load, setLoad] = useState(false);
+    const [dataGroup, setDataGroup] = useState<Object[]>( [] );
+    const [keyGroup, setKeyGroup] = useState<Object[]>( [] );
+
+    const handleLoad = () => {
+        setLoad(true);
+    }
+
+    function clean (obj: Object[]) {
+        for (var keys in obj) {
+            if (keys === 'id' || keys === 'isDirect' || keys === 'token')
+                delete obj[keys];
+
+            if (obj[keys] === null || obj[keys] === undefined) {
+                delete obj[keys];
+            }
+        }
+
+        return obj;
+    }
+
 
     useEffect(() => {
         if (classroom === initial) {
             const currentClassroomState = async (): Promise<ClassroomInstProps[]> => {
                 return await axios.get<ClassroomInstProps[]>('http://isel.lifove.net/api/token/')
-                //return await axios.get<ClassroomInstProps[]>('/api/token/')
+                // return await axios.get<ClassroomInstProps[]>('/api/token/')
                 .then((response) => {
                     return response.data
                 });
             };
 
+            const getGradingData = async () => {
+                return await axios.get('/api/grade/', {
+                    params: {
+                        itoken: props.match.params.token
+                    },
+                }).then((response) => {
+                    return response.data;
+                });
+            }
+
             currentClassroomState()
             .then(response => {
                 setClassroom(response.find(element => element.itoken === props.match.params.token) || initial);
-                
                 if (response.find(element => element.itoken === props.match.params.token) === undefined) {
                     props.history.push('/jchecker');
                     alert("클래스가 없습니다.😅");
                 }
+                
+                getGradingData()
+                .then((response) => {
+                    var i = 0;
+                    for (; i < response.length; i++) {
+                        const element = clean(response[i]);
+
+                        if (i === 0) {
+                            setKeyGroup(Object.keys(element));
+                        }
+
+                        setDataGroup(old => [ ...old, element]);
+                    }
+
+                    handleLoad();
+                })
             })
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[classroom]);
+    },[classroom, load]);
 
-    
+
     return (
         <>
             <AppBar position="fixed" style={{ background: 'transparent', boxShadow: 'none' }} >
@@ -117,11 +166,13 @@ function EachClass(props: RouteComponentProps<RouteParamsProps>) {
                 </Toolbar>
             </AppBar>
             <SectionLayout backgroundClassName={classesStyle.background} classes={classesLayout}>
-                {}
                 <img style={{ display : 'none' }} src={backgroundImage} alt="prioirty" />
                 <Typographic color="inherit" align="center" variant="h2" marked="center" className={classesStyle.h2}>
                     {classroom.className}
                 </Typographic>
+                
+                {load && <SectionTable pre={keyGroup} values={dataGroup} />}
+
                 <Typographic color="inherit" align="center" variant="h5" className={classesStyle.h5}>
                     opened by <b>{classroom.instructor}</b> on {classroom.createDate}
                 </Typographic>

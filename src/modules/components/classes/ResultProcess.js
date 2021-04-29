@@ -81,9 +81,8 @@ function ResultProcess (props) {
 
     const results = props.location.state.detail;
 
-
     const isPassed = {
-        feedback: results.isDirect,
+        feedback: results.isDirect === 'true' ? true : false,
         count: results.count !== undefined ? (results.count.deductedPoint === 0 ? true : false) : undefined,
         compiled: results.compile !== undefined ? (results.compile.deductedPoint === 0 ? true : false) : undefined,
         inputs: results.runtimeCompare !== undefined ? (results.runtimeCompare.deductedPoint === 0 ? true : false) : undefined,
@@ -100,8 +99,6 @@ function ResultProcess (props) {
         encapsulation: results.encapsulation !== undefined ? (results.encapsulation.deductedPoint === 0 ? true : false) : undefined,
     };
 
-
-    
     
     return (
         <>
@@ -127,6 +124,7 @@ function ResultProcess (props) {
 
                 {isPassed.feedback &&
                     <Typographic color="inherit" align="center" variant="h3" >
+                        {isPassed.feedback}
                         { results.result } / { results.point }
                     </Typographic>
                 }
@@ -234,10 +232,6 @@ function ResultProcess (props) {
                         (-{results.encapsulation.deductedPoint}) {t('result.score.encap')}
                     </Typographic>
                 }
-
-
-                
-
 
                 <Button 
                     variant="contained" 
