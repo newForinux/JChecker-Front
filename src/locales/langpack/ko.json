@@ -42,6 +42,10 @@
     "class name": "클래스 네임",
     "method name": "메서드 네임",
     "interface name": "인터페이스 네임",
+    "Interface class name": "상속 클래스 네임",
+    "Inherited class name": "서브 클래스 네임",
+    "super class name": "슈퍼 클래스 네임",
+
     "instructor name": "개설자 이름",
 
     "dialog.1": "채점 기준",

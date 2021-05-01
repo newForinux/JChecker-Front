@@ -14,7 +14,7 @@ import { IconButton,
     FormControl,
     Grid} from "@material-ui/core";
 import StarterMajorLayout from "./SectionLayout";
-import Typographic from "../components/CTypography";
+import Typographic from "../components/Typographic";
 import { Link, RouteComponentProps } from "react-router-dom";
 import React, { useState } from "react";
 import SearchIcon from '@material-ui/icons/Search';
@@ -65,16 +65,32 @@ const useStyles = makeStyles((theme: Theme) => ({
         marginBottom: theme.spacing(1),
     },
     textField: {
-        background: 'white',
+        margin: 8, 
+        borderColor: "white", 
+        borderRadius: 4, 
+        backgroundColor: "white", 
+        width: 250,
+        [theme.breakpoints.up('sm')]: {
+            width: 350,
+        },
+        [theme.breakpoints.up('lg')]: {
+            width: 500,
+        },
     },
     resize: {
-        fontSize: 20,
+        fontSize: theme.typography.pxToRem(14),
+        [theme.breakpoints.up('sm')]: {
+            fontSize: theme.typography.pxToRem(16),
+        },
+        [theme.breakpoints.up('md')]: {
+            fontSize: theme.typography.pxToRem(20),
+        },
     },
 }));
 
 
 
-function PreClasses (props: RouteComponentProps) {
+function EntranceInstructor (props: RouteComponentProps) {
     const classes = useStyles();
 
     const { t } = useTranslation();
@@ -148,7 +164,16 @@ function PreClasses (props: RouteComponentProps) {
                 {t('entrance.instructor detail.3')}<br />
                 {t('entrance.instructor detail.4')}
             </Typographic>
-            <TextField value={value || ""} onChange={handleChange} label={t('input.')} style={{ margin: 8, borderColor: "white", borderRadius: 4, backgroundColor: "white", width: 500, fontSize: 16 }} 
+            <TextField 
+                autoFocus={true}
+                value={value || ""}
+                onChange={handleChange}
+                onKeyPress={e => {
+                    if (e.key === 'Enter' && value.length > 0) 
+                        props.history.push(`${props.match.url}/${value}`)
+                    }}
+                label={t('input.')}
+                className={classes.textField}
                 placeholder={t('input.token')} margin="normal" variant="outlined" InputProps={{
                     classes: {
                         input: classes.resize,
@@ -255,4 +280,4 @@ function PreClasses (props: RouteComponentProps) {
 }
 
 
-export default WithRoot(PreClasses);
+export default WithRoot(EntranceInstructor);

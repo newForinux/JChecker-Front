@@ -3,11 +3,11 @@ import React, { useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router"
 import WithRoot from '../../root';
 import SectionLayout from "../../views/SectionLayout";
-import Typographic from "../../components/CTypography";
+import Typographic from "../Typographic";
 import Toolbar from '../../components/Toolbar';
 import AppFooter from "../../views/Footer";
 import axios from "axios";
-import FileUploadComponent from "../FileTransfer";
+import FileTransfer from "../FileTransfer";
 import { ClassroomProps, RouteParamsProps } from ".";
 import { useTranslation } from "react-i18next";
 
@@ -58,13 +58,22 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     logo: {
         marginTop: theme.spacing(1),
-        maxWidth: "300px",
+        maxWidth: 200,
+        [theme.breakpoints.up('sm')]: {
+            maxWidth: 250,
+        },
+        [theme.breakpoints.up('xl')]: {
+            maxWidth: 300,
+        },
     },
 }));
 
 
 const useStylesLayout = makeStyles((theme: Theme) => ({
     root: {
+        height: '100vh',
+        minHeight: 500,
+        maxHeight: 800,
         [theme.breakpoints.up('sm')]: {
             height: '100vh',
             minHeight: 800,
@@ -103,7 +112,7 @@ function SectionClass(props: RouteComponentProps<RouteParamsProps>) {
         else
             props.history.push({
                 pathname: `${props.match.url}/success`,
-                state: { detail: grading },
+                state: grading,
             });
     }
 
@@ -112,7 +121,7 @@ function SectionClass(props: RouteComponentProps<RouteParamsProps>) {
         if (classroom === initial) {
             const currentClassroomState = async (): Promise<ClassroomProps[]> => {
                 return await axios.get<ClassroomProps[]>('http://isel.lifove.net/api/token/')
-                //return await axios.get<ClassroomProps[]>('/api/token/')
+                // return await axios.get<ClassroomProps[]>('/api/token/')
                 .then((response) => {
                     return response.data
                 });
@@ -172,7 +181,7 @@ function SectionClass(props: RouteComponentProps<RouteParamsProps>) {
                     margin="normal" 
                 />
                 {valid &&
-                    <FileUploadComponent name={classroom.token} id={studentID} onCreate={handleCreate} />
+                    <FileTransfer name={classroom.token} id={studentID} onCreate={handleCreate} />
                 }
             </SectionLayout>
             <AppFooter />

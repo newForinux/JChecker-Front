@@ -5,7 +5,7 @@ import React from "react";
 
 interface Props extends WithStyles<typeof styles> {
     backgroundClassName?: string,
-    children?: React.ReactNode,
+    children?: React.ReactNode, 
 }
 
 
@@ -15,6 +15,9 @@ const styles = (theme: Theme) => createStyles ({
         position: 'relative',
         display: 'flex',
         alignItems: 'center',
+        height: '95vh',
+        minHeight: 300,
+        maxHeight: 800,
         [theme.breakpoints.up('sm')]: {
             height: '80vh',
             minHeight: 500,

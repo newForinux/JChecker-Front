@@ -3,7 +3,7 @@ import axios from "axios";
 import produce from "immer";
 
 import React, { useState } from "react";
-import Typographic from './CTypography';
+import Typographic from './Typographic';
 import { useTranslation } from "react-i18next";
 import ClassDialog from "./policy/app.component.policy.classes";
 import CompiledDialog from "./policy/app.component.policy.compiled";
@@ -125,7 +125,7 @@ export default function SelectCond(props: PolicyProps) {
     
     const handleSubmit = () => {
         axios.post("http://isel.lifove.net/api/token/save", JSON.stringify(policy, null, 2), {
-        //axios.post("/api/token/save", JSON.stringify(policy, null, 2), {    
+        // axios.post("/api/token/save", JSON.stringify(policy, null, 2), {    
             headers: {"Content-Type": 'application/json'}
         }).then((res) => {
             setOpen(false);

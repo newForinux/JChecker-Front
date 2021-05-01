@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router"
 import WithRoot from '../../root';
 import SectionLayout from "../../views/SectionLayout";
-import Typographic from "../CTypography";
+import Typographic from "../Typographic";
 import Toolbar from '../Toolbar';
 import AppFooter from "../../views/Footer";
 import axios from "axios";
@@ -50,13 +50,22 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     logo: {
         marginTop: theme.spacing(1),
-        maxWidth: "300px",
+        maxWidth: 200,
+        [theme.breakpoints.up('sm')]: {
+            maxWidth: 250,
+        },
+        [theme.breakpoints.up('xl')]: {
+            maxWidth: 300,
+        },
     },
 }));
 
 
 const useStylesLayout = makeStyles((theme: Theme) => ({
     root: {
+        height: '100vh',
+        minHeight: 500,
+        maxHeight: 800,
         [theme.breakpoints.up('sm')]: {
             height: '100vh',
             minHeight: 800,

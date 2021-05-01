@@ -6,12 +6,14 @@ import { Button,
     DialogTitle, 
     FormControl, 
     Grid, 
+    IconButton, 
     makeStyles, 
     TextField } from "@material-ui/core";
 import React, { useEffect, useState } from "react"
 import AddIcon from '@material-ui/icons/Add';
 import { DialogRawProp } from ".";
 import { useTranslation } from "react-i18next";
+import { DeleteOutline } from "@material-ui/icons";
 
 
 const style = makeStyles({
@@ -46,6 +48,21 @@ export default function SuperclassDialog(props: DialogRawProp) {
     const appendFields = () => {
         let element = `spc-${fields.length}`;
         setFields(fields => fields.concat([element]));
+    }
+
+
+    const deleteFields = (index : number) => {
+        const _fields = [...fields];
+        const _origin = [...originClass];
+        const _superclass = [...superclass];
+
+        _fields.splice(index, 1);
+        _origin.splice(index, 1);
+        _superclass.splice(index, 1);
+
+        setFields(_fields);
+        setOriginClass(_origin);
+        setSuperclass(_superclass);
     }
 
 
@@ -150,7 +167,7 @@ export default function SuperclassDialog(props: DialogRawProp) {
             </Grid>
 
             {fields.map((input, index) => (
-                <Grid container spacing={1} key={index}>
+                <Grid container spacing={1} key={index} alignItems="center" justify="center">
                     <Grid xs item>
                         <FormControl fullWidth margin="normal">
                             <TextField
@@ -178,6 +195,11 @@ export default function SuperclassDialog(props: DialogRawProp) {
                                 onChange={handleSuperChange(index)}
                             />
                         </FormControl>
+                    </Grid>
+                    <Grid xs={1} item>
+                        <IconButton size="medium" onClick={() => deleteFields(index)}>
+                            <DeleteOutline />
+                        </IconButton>
                     </Grid>
                 </Grid>
             ))}

@@ -1,6 +1,6 @@
 import { Theme, withStyles, WithStyles } from "@material-ui/core";
 import SectionLayout from "./SectionLayout";
-import Typographic from "../components/CTypography";
+import Typographic from "../components/Typographic";
 import Button from "../components/Button";
 import React from "react";
 import FadeIn from "react-fade-in";

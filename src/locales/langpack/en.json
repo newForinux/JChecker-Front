@@ -42,7 +42,10 @@
     "class name": "Class Name",
     "method name": "Method Name",
     "interface name": "Interface Name",
+    "Interface class name": "Implemented Class Name",
     "instructor name": "Instructor Name",
+    "Inherited class name": "Subclass Name",
+    "super class name": "Superclass Name",
 
     "dialog.1": "Grading policy",
     "dialog.2": "Select which details to examine using static analysis.",

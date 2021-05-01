@@ -6,12 +6,14 @@ import { Button,
     DialogTitle, 
     FormControl, 
     Grid, 
+    IconButton, 
     makeStyles, 
     TextField } from "@material-ui/core";
 import React, { useEffect, useState } from "react"
 import AddIcon from '@material-ui/icons/Add';
 import { useTranslation } from "react-i18next";
 import { DialogRawProp } from ".";
+import { DeleteOutline } from "@material-ui/icons";
 
 
 const style = makeStyles({
@@ -45,6 +47,21 @@ export default function InterfaceDialog(props: DialogRawProp) {
     const appendFields = () => {
         let element = `itf-${fields.length}`;
         setFields(fields => fields.concat([element]));
+    }
+
+
+    const deleteFields = (index : number) => {
+        const _fields = [...fields];
+        const _origin = [...originClass];
+        const _interface = [...interfaces];
+
+        _fields.splice(index, 1);
+        _origin.splice(index, 1);
+        _interface.splice(index, 1);
+
+        setFields(_fields);
+        setOrigins(_origin);
+        setInterfaces(_interface);
     }
 
 
@@ -152,14 +169,14 @@ export default function InterfaceDialog(props: DialogRawProp) {
             </Grid>
 
             {fields.map((input, index) => (
-                <Grid container spacing={1} key={index}>
+                <Grid container spacing={1} key={index} alignItems="center" justify="center">
                     <Grid xs item>
                         <FormControl fullWidth margin="normal">
                             <TextField
                                 value={originClass[index] || ""}
                                 variant="outlined"
                                 id={"org-" + index}
-                                label={t('Inherited class name')}
+                                label={t('Interface class name')}
                                 name={"org-" + index}
                                 size="medium"
                                 className="iorg"
@@ -180,6 +197,11 @@ export default function InterfaceDialog(props: DialogRawProp) {
                                 onChange={handleInterfaceChange(index)}
                             />
                         </FormControl>
+                    </Grid>
+                    <Grid xs={1} item>
+                        <IconButton size="medium" onClick={() => deleteFields(index)}>
+                            <DeleteOutline />
+                        </IconButton>
                     </Grid>
                 </Grid>
             ))}

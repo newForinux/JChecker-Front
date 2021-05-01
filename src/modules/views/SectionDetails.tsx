@@ -1,5 +1,5 @@
 import { Container, createStyles, Grid, Theme, withStyles, WithStyles } from "@material-ui/core";
-import Typographic from "../components/CTypography";
+import Typographic from "../components/Typographic";
 import React from "react";
 import { useTranslation } from "react-i18next";
 

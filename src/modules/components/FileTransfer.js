@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from '@material-ui/core/Button';
 import { CloudUpload } from '@material-ui/icons';
 import axios from 'axios';
-import { CircularProgress, makeStyles } from "@material-ui/core";
+import { Backdrop, CircularProgress, makeStyles } from "@material-ui/core";
 import { blue } from '@material-ui/core/colors';
 
 
@@ -25,11 +25,15 @@ const useStyles = makeStyles((theme) => ({
         marginTop: -12,
         marginLeft: -10,
     },
+    backdrop: {
+        zIndex: theme.zIndex.drawer + 1,
+        color: '#fff',
+    },
 }));
 
 
 
-function FileUploadComponent (props) {
+function FileTransfer (props) {
     const classes = useStyles();
     const [file, setfile] = useState(null);
     const [disabled, setdisabled] = useState(true);
@@ -40,7 +44,7 @@ function FileUploadComponent (props) {
         formData.append('file', file);
 
         return axios.post('http://isel.lifove.net/api/grade/execute', formData, {
-        //return axios.post('/api/grade/execute', formData, {
+        // return axios.post('/api/grade/execute', formData, {
             params: {
                 studentNum: props.id,
                 token: props.name,
@@ -86,14 +90,25 @@ function FileUploadComponent (props) {
             <form onSubmit={upload} className={classes.form}>
                 <input accept="application/zip" type="file" onChange={fileChange} name="file" />      
                 <div className={classes.wrapper}>
-                    <Button type="submit" variant="contained" color="secondary" size="large" startIcon={<CloudUpload />} disabled={props.id.length !== 8 || disabled} onClick={handleClick}>
+                    <Button type="submit" 
+                            variant="contained" 
+                            color="secondary" 
+                            size="large" 
+                            startIcon={<CloudUpload />} 
+                            disabled={props.id.length !== 8 || disabled} 
+                            onClick={handleClick}
+                    >
                         Upload
                     </Button>
-                    {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+                    {loading &&
+                        <Backdrop className={classes.backdrop} open={loading}>
+                            <CircularProgress color="inherit" />
+                        </Backdrop>
+                    }
                 </div>
             </form>
         </div>   
     )
 }
 
-export default FileUploadComponent;
+export default FileTransfer;

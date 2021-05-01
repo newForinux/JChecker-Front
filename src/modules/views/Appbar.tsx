@@ -20,14 +20,26 @@ const astyles = (theme: Theme) => ({
     },
     langIcon: {
         marginLeft: theme.spacing(2),
-        maxWidth: "48px",
+        minWidth: "24px",
+        [theme.breakpoints.up('sm')]: {
+            minWidth: "36px",
+        },
+        [theme.breakpoints.up('lg')]: {
+            minWidth: "48px",
+        },
     },
     left: {
         flex: 1,
     },
     logo: {
         marginTop: theme.spacing(1),
-        maxWidth: "300px",
+        maxWidth: "175px",
+        [theme.breakpoints.up('sm')]: {
+            maxWidth: "300px",
+        },
+        [theme.breakpoints.up('xl')]: {
+            maxWidth: "350px",
+        },
     }
 });
 
@@ -57,11 +69,11 @@ function AppBarView (props: Props) {
                     </Link>
 
                     <div className={classes.right}>
-                        <Button className={classes.langIcon} onClick={() => handleChangeLang('ko')}>
-                            <img src="/assets/kor.svg" alt="kor" />
+                        <Button onClick={() => handleChangeLang('ko')}>
+                            <img src="/assets/kor.svg" alt="kor" className={classes.langIcon} />
                         </Button>
-                        <Button className={classes.langIcon} onClick={() => handleChangeLang('en')}>
-                            <img src="/assets/eng.svg" alt="eng" />
+                        <Button onClick={() => handleChangeLang('en')}>
+                            <img src="/assets/eng.svg" alt="eng" className={classes.langIcon} />
                         </Button>
                     </div>
                     

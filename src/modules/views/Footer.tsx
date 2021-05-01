@@ -1,5 +1,5 @@
 import { Container, Grid, Link, makeStyles, Theme, Typography } from "@material-ui/core";
-import Typographic from '../components/CTypography';
+import Typographic from '../components/Typographic';
 import React from "react";
 
 
@@ -37,31 +37,62 @@ const useStyles = makeStyles((theme: Theme) => ({
         alignItems: 'center',
     },
     icons: {
-        width: 35,
-        height: 35,
+        minWidth: 15,
+        maxWidth: 25,
+        [theme.breakpoints.up('sm')]: {
+            minWidth: 25,
+            maxWidth: 30,
+        },
+        [theme.breakpoints.up('xl')]: {
+            minWidth: 30,
+            maxWidth: 40,
+        },
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         marginRight: theme.spacing(1),
     },
     logoIcons: {
-        maxWidth: 300,
-        maxHeight: 50,
+        maxWidth: 180,
+        maxHeight: 30,
+        [theme.breakpoints.up('sm')]: {
+            maxWidth: 250,
+            maxHeight: 40,
+        },
+        [theme.breakpoints.up('xl')]: {
+            maxWidth: 300,
+            maxHeight: 50,
+        },
         display: 'flex',
-        
         marginRight: theme.spacing(1),
     },
     labIcons: {
-        width: 70,
-        height: 74,
+        width: 36,
+        hidth: 34,
+        [theme.breakpoints.up('sm')]: {
+            width: 50,
+            height: 52,
+        },
+        [theme.breakpoints.up('xl')]: {
+            width: 81,
+            height: 84,
+        },
         display: 'flex',
         justifyContent: 'flex-start',
         alignItems: 'center',
         marginRight: theme.spacing(1),
     },
     backgroundIcons: {
-        width: 200,
-        height: 76,
+        width: 120,
+        height: 46,
+        [theme.breakpoints.up('sm')]: {
+            width: 160,
+            height: 61,
+        },
+        [theme.breakpoints.up('xl')]: {
+            width: 200,
+            height: 71,
+        },
         display: 'flex',
         justifyContent: 'center',
     },

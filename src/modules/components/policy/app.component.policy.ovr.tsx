@@ -6,12 +6,14 @@ import { Button,
     DialogTitle, 
     FormControl, 
     Grid, 
+    IconButton, 
     makeStyles, 
     TextField } from "@material-ui/core";
 import React, { useEffect, useState } from "react"
 import AddIcon from '@material-ui/icons/Add';
 import { useTranslation } from "react-i18next";
 import { DialogRawProp } from ".";
+import { DeleteOutline } from "@material-ui/icons";
 
 
 const style = makeStyles({
@@ -44,6 +46,18 @@ export default function OverridingDialog(props: DialogRawProp) {
     const appendFields = () => {
         let element = `ovr-${fields.length}`;
         setFields(fields => fields.concat([element]));
+    }
+
+
+    const deleteFields = (index : number) => {
+        const _fields = [...fields];
+        const _required = [...required];
+
+        _fields.splice(index, 1);
+        _required.splice(index, 1);
+
+        setFields(_fields);
+        setRequired(_required);
     }
 
 
@@ -141,8 +155,8 @@ export default function OverridingDialog(props: DialogRawProp) {
             </Grid>
 
             {fields.map((input, index) => (
-                <Grid xs={12} container spacing={1} item key={index}>
-                    <Grid xs={12} item>
+                <Grid xs={12} container spacing={1} item key={index} alignItems="center" justify="center">
+                    <Grid xs={11} item>
                         <FormControl fullWidth margin="normal">
                             <TextField
                                 value={required[index] || ""}
@@ -155,6 +169,11 @@ export default function OverridingDialog(props: DialogRawProp) {
                                 onChange={handleRequiredChange(index)}
                             />
                         </FormControl>
+                    </Grid>
+                    <Grid xs={1} item>
+                        <IconButton size="medium" onClick={() => deleteFields(index)}>
+                            <DeleteOutline />
+                        </IconButton>
                     </Grid>
                 </Grid>
             ))}
