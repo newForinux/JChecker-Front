@@ -8,6 +8,8 @@ import AppFooter from "../../views/Footer";
 import PlaylistAddCheckRoundedIcon from '@material-ui/icons/PlaylistAddCheckRounded';
 import { useTranslation } from "react-i18next";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import { GradingResultProps, RouteParamsProps } from ".";
+import { RouteComponentProps } from "react-router-dom";
 
 const backgroundImage = "https://images.unsplash.com/photo-1505279340786-1e3b097e227a?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=967&q=80";
 
@@ -48,7 +50,13 @@ const useStyles = makeStyles((theme) => ({
     },
     logo: {
         marginTop: theme.spacing(1),
-        maxWidth: "300px",
+        maxWidth: 200,
+        [theme.breakpoints.up('sm')]: {
+            maxWidth: 250,
+        },
+        [theme.breakpoints.up('xl')]: {
+            maxWidth: 300,
+        },
     },
     goback: {
         marginTop: theme.spacing(5),
@@ -58,6 +66,9 @@ const useStyles = makeStyles((theme) => ({
 
 const useStylesLayout = makeStyles((theme) => ({
     root: {
+        height: '100vh',
+        minHeight: 500,
+        maxHeight: 800,
         [theme.breakpoints.up('sm')]: {
             height: '100vh',
             minHeight: 800,
@@ -67,7 +78,7 @@ const useStylesLayout = makeStyles((theme) => ({
 }));
 
 
-function ResultProcess (props) {
+function ResultProcess (props : RouteComponentProps<RouteParamsProps>) {
     const classesStyle = useStyles();
     const classesLayout = useStylesLayout();
     const { t } = useTranslation();
@@ -78,10 +89,9 @@ function ResultProcess (props) {
     } 
     
     else {
+    const results = props.location.state as GradingResultProps;
 
-    const results = props.location.state.detail;
-
-    const isPassed = {
+    const existsInPolicy = {
         feedback: results.isDirect === 'true' ? true : false,
         count: results.count !== undefined ? (results.count.deductedPoint === 0 ? true : false) : undefined,
         compiled: results.compile !== undefined ? (results.compile.deductedPoint === 0 ? true : false) : undefined,
@@ -122,114 +132,114 @@ function ResultProcess (props) {
                     { results.studentNum } _ {t('result.score.success')}
                 </Typographic>
 
-                {isPassed.feedback &&
+                {existsInPolicy.feedback &&
                     <Typographic color="inherit" align="center" variant="h3" >
-                        {isPassed.feedback}
+                        {existsInPolicy.feedback}
                         { results.result } / { results.point }
                     </Typographic>
                 }
 
                 
-                {isPassed.feedback && isPassed.count === false &&
+                {existsInPolicy.feedback && existsInPolicy.count === false &&
                     <Typographic color="inherit" align="left" variant="subtitle1" className={classesStyle.h6}>
                         <PlaylistAddCheckRoundedIcon color="error" /> &nbsp;
-                        (-{results.count.deductedPoint}) {t('result.score.count')}
+                        (-{results.count!.deductedPoint}) {t('result.score.count')}
                     </Typographic>
                 }
 
 
-                {isPassed.feedback && isPassed.classes === false &&
+                {existsInPolicy.feedback && existsInPolicy.classes === false &&
                     <Typographic color="inherit" align="left" variant="subtitle1" className={classesStyle.h6}>
                         <PlaylistAddCheckRoundedIcon color="error" /> &nbsp;
-                        (-{results.classes.deductedPoint}) {t('result.score.class')}
+                        (-{results.classes!.deductedPoint}) {t('result.score.class')}
                     </Typographic>
                 }
 
 
-                {isPassed.feedback && isPassed.compiled === false &&
+                {existsInPolicy.feedback && existsInPolicy.compiled === false &&
                     <Typographic color="inherit" align="left" variant="subtitle1" className={classesStyle.h6}>
                         <PlaylistAddCheckRoundedIcon color="error" /> &nbsp;
-                        (-{results.compile.deductedPoint}) {t('result.score.compile')}
+                        (-{results.compile!.deductedPoint}) {t('result.score.compile')}
                     </Typographic>
                 }
 
-                {isPassed.feedback && isPassed.inputs === false &&
+                {existsInPolicy.feedback && existsInPolicy.inputs === false &&
                     <Typographic color="inherit" align="left" variant="subtitle1" className={classesStyle.h6}>
                         <PlaylistAddCheckRoundedIcon color="error" /> &nbsp;
-                        (-{results.runtimeCompare.deductedPoint}) {t('result.score.testcase')}
+                        (-{results.runtimeCompare!.deductedPoint}) {t('result.score.testcase')}
                     </Typographic>
                 }
 
-                {isPassed.feedback && isPassed.packages === false &&
+                {existsInPolicy.feedback && existsInPolicy.packages === false &&
                     <Typographic color="inherit" align="left" variant="subtitle1" className={classesStyle.h6}>
                         <PlaylistAddCheckRoundedIcon color="error" /> &nbsp;
-                        (-{results.packages.deductedPoint}) {t('result.score.package')}
+                        (-{results.packages!.deductedPoint}) {t('result.score.package')}
                     </Typographic>
                 }
 
-                {isPassed.feedback && isPassed.custexc === false &&
+                {existsInPolicy.feedback && existsInPolicy.custexc === false &&
                     <Typographic color="inherit" align="left" variant="subtitle1" className={classesStyle.h6}>
                         <PlaylistAddCheckRoundedIcon color="error" /> &nbsp;
-                        (-{results.customException.deductedPoint}) {t('result.score.customexc')}
+                        (-{results.customException!.deductedPoint}) {t('result.score.customexc')}
                     </Typographic>
                 }
 
-                {isPassed.feedback && isPassed.custstr === false &&
+                {existsInPolicy.feedback && existsInPolicy.custstr === false &&
                     <Typographic color="inherit" align="left" variant="subtitle1" className={classesStyle.h6}>
                         <PlaylistAddCheckRoundedIcon color="error" /> &nbsp;
-                        (-{results.customStructure.deductedPoint}) {t('result.score.customstr')}
+                        (-{results.customStructure!.deductedPoint}) {t('result.score.customstr')}
                     </Typographic>
                 }
 
-                {isPassed.feedback && isPassed.interfaces === false &&
+                {existsInPolicy.feedback && existsInPolicy.interfaces === false &&
                     <Typographic color="inherit" align="left" variant="subtitle1" className={classesStyle.h6}>
                         <PlaylistAddCheckRoundedIcon color="error" /> &nbsp;
-                        (-{results.inheritInterface.deductedPoint}) {t('result.score.interface')}
+                        (-{results.inheritInterface!.deductedPoint}) {t('result.score.interface')}
                     </Typographic>
                 }
 
-                {isPassed.feedback && isPassed.superclass === false &&
+                {existsInPolicy.feedback && existsInPolicy.superclass === false &&
                     <Typographic color="inherit" align="left" variant="subtitle1" className={classesStyle.h6}>
                         <PlaylistAddCheckRoundedIcon color="error" /> &nbsp;
-                        (-{results.inheritSuper.deductedPoint}) {t('result.score.superclass')}
+                        (-{results.inheritSuper!.deductedPoint}) {t('result.score.superclass')}
                     </Typographic>
                 }
 
-                {isPassed.feedback && isPassed.overriding === false &&
+                {existsInPolicy.feedback && existsInPolicy.overriding === false &&
                     <Typographic color="inherit" align="left" variant="subtitle1" className={classesStyle.h6}>
                         <PlaylistAddCheckRoundedIcon color="error" /> &nbsp;
-                        (-{results.overriding.deductedPoint}) {t('result.score.overriding')}
+                        (-{results.overriding!.deductedPoint}) {t('result.score.overriding')}
                     </Typographic>
                 }
 
-                {isPassed.feedback && isPassed.overloading === false &&
+                {existsInPolicy.feedback && existsInPolicy.overloading === false &&
                     <Typographic color="inherit" align="left" variant="subtitle1" className={classesStyle.h6}>
                         <PlaylistAddCheckRoundedIcon color="error" /> &nbsp;
-                        (-{results.overloading.deductedPoint}) {t('result.score.overloading')}
+                        (-{results.overloading!.deductedPoint}) {t('result.score.overloading')}
                     </Typographic>
                 }
 
 
-                {isPassed.feedback && isPassed.thread === false &&
+                {existsInPolicy.feedback && existsInPolicy.thread === false &&
                     <Typographic color="inherit" align="left" variant="subtitle1" className={classesStyle.h6}>
                         <PlaylistAddCheckRoundedIcon color="error" /> &nbsp;
-                        (-{results.thread.deductedPoint}) {t('result.score.thread')}
+                        (-{results.thread!.deductedPoint}) {t('result.score.thread')}
                     </Typographic>
                 }   
                 
 
-                {isPassed.feedback && isPassed.javadoc === false &&
+                {existsInPolicy.feedback && existsInPolicy.javadoc === false &&
                     <Typographic color="inherit" align="left" variant="subtitle1" className={classesStyle.h6}>
                         <PlaylistAddCheckRoundedIcon color="error" /> &nbsp;
-                        (-{results.javadoc.deductedPoint}) {t('result.score.javadoc')}
+                        (-{results.javadoc!.deductedPoint}) {t('result.score.javadoc')}
                     </Typographic>
                 }
 
 
-                {isPassed.feedback && isPassed.encapsulation === false &&
+                {existsInPolicy.feedback && existsInPolicy.encapsulation === false &&
                     <Typographic color="inherit" align="left" variant="subtitle1" className={classesStyle.h6}>
                         <PlaylistAddCheckRoundedIcon color="error" /> &nbsp;
-                        (-{results.encapsulation.deductedPoint}) {t('result.score.encap')}
+                        (-{results.encapsulation!.deductedPoint}) {t('result.score.encap')}
                     </Typographic>
                 }
 

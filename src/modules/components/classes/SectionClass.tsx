@@ -112,7 +112,7 @@ function SectionClass(props: RouteComponentProps<RouteParamsProps>) {
         else
             props.history.push({
                 pathname: `${props.match.url}/success`,
-                state: { detail: grading },
+                state: grading,
             });
     }
 
