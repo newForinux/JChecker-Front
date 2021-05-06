@@ -25,7 +25,7 @@ const style = makeStyles({
 
 
 
-export default function InputDialog(props: DialogRawProp) {
+export default function OracleDialog(props: DialogRawProp) {
     const { t } = useTranslation();
     const classes = style();
     const { open: isOpen } = props;
@@ -36,7 +36,7 @@ export default function InputDialog(props: DialogRawProp) {
     const [inputData, setInputData] = useState([""]);
     const [deduct, setDeduct] = useState(0);
     const [max_deduct, setMax_deduct] = useState(0);
-    const [resIO, setResIO] = useState({
+    const [resOracle, setResOracle] = useState({
         state: false,
         input: [] as string[],
         output: [] as string[],
@@ -80,9 +80,9 @@ export default function InputDialog(props: DialogRawProp) {
 
 
     useEffect(() => {
-        props.onCreate("runtimeCompare", resIO);
+        props.onCreate("oracle", resOracle);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[resIO]);
+    },[resOracle]);
 
     
     const handleInputChange = (index : number) => (e : React.ChangeEvent<HTMLInputElement>) => {
@@ -100,7 +100,7 @@ export default function InputDialog(props: DialogRawProp) {
 
 
     const handleClose = () => {
-        setResIO({
+        setResOracle({
             state: false,
             input: [],
             output: [],
@@ -111,8 +111,8 @@ export default function InputDialog(props: DialogRawProp) {
     }
 
 
-    const handleResIO = () => {
-        setResIO({
+    const handleResOracle = () => {
+        setResOracle({
             state: true,
             input: inputData,
             output: outputData,
@@ -210,7 +210,7 @@ export default function InputDialog(props: DialogRawProp) {
                 <Button onClick={handleClose} color="primary">
                     {t('closed')}
                 </Button>
-                <Button onClick={handleResIO} color="primary">
+                <Button onClick={handleResOracle} color="primary">
                     {t('submit')}
                 </Button>
             </DialogActions>

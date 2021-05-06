@@ -12,7 +12,7 @@ import StructureDialog from "./policy/app.component.policy.custom.ds";
 import ExceptionDialog from "./policy/app.component.policy.custom.except";
 import EncapDialog from "./policy/app.component.policy.encap";
 import InterfaceDialog from "./policy/app.component.policy.interface";
-import InputDialog from "./policy/app.component.policy.io";
+import OracleDialog from "./policy/app.component.policy.oracle";
 import JavadocDialog from "./policy/app.component.policy.javadoc";
 import OverloadingDialog from "./policy/app.component.policy.ovl";
 import OverridingDialog from "./policy/app.component.policy.ovr";
@@ -43,7 +43,7 @@ export default function SelectCond(props: PolicyProps) {
         itoken: props.itoken,
         count: false,
         compiled: false,
-        inputs: false,
+        oracle: false,
         classes: false,
         packages: false,
         custexc: false,
@@ -67,7 +67,7 @@ export default function SelectCond(props: PolicyProps) {
         point: 0,
         count: { state: false } as Object,
         compiled: { state: false } as Object,
-        runtimeCompare: { state: false } as Object,
+        oracle: { state: false } as Object,
         classes : { state: false } as Object,
         packages: { state: false } as Object,
         customException: { state: false } as Object,
@@ -180,10 +180,10 @@ export default function SelectCond(props: PolicyProps) {
 
                         <FormControlLabel
                             control={
-                                <Checkbox checked={state.inputs}
+                                <Checkbox checked={state.oracle}
                                         onChange={handleChange}
-                                        name="inputs" />}
-                            label="Input"
+                                        name="oracle" />}
+                            label="Oracle"
                         />
                         
                         <FormControlLabel
@@ -283,8 +283,8 @@ export default function SelectCond(props: PolicyProps) {
                 {state.compiled && 
                     <CompiledDialog open={state.compiled} onCreate={handleCreate} keepMounted /> }
 
-                {state.inputs && 
-                    <InputDialog open={state.inputs} onCreate={handleCreate} keepMounted /> }
+                {state.oracle && 
+                    <OracleDialog open={state.oracle} onCreate={handleCreate} keepMounted /> }
                 
                 {state.classes &&
                     <ClassDialog open={state.classes} onCreate={handleCreate} keepMounted /> }
