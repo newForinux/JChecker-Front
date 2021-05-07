@@ -29,9 +29,6 @@ const useStyles = makeStyles((theme: Theme) => ({
         display: 'flex',
     },
     iconsWrapper: {
-        height: 60,
-    },
-    iconsWrapperSecondary: {
         height: 76,
         marginBottom: theme.spacing(1),
         alignItems: 'center',
@@ -50,7 +47,8 @@ const useStyles = makeStyles((theme: Theme) => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        marginRight: theme.spacing(1),
+        marginTop: theme.spacing(2),
+        marginRight: theme.spacing(3),
     },
     logoIcons: {
         maxWidth: 180,
@@ -96,15 +94,6 @@ const useStyles = makeStyles((theme: Theme) => ({
         display: 'flex',
         justifyContent: 'center',
     },
-    list: {
-        margin: 0,
-        listStyle: 'none',
-        padding: 0,
-    },
-    listItem: {
-        paddingTop: theme.spacing(0.5),
-        paddingBottom: theme.spacing(0.5),
-    },
     white: {
         color: theme.palette.common.white,
     }
@@ -124,7 +113,7 @@ function AppFooter() {
                         container
                         direction='row'
                         justify="flex-start"
-                        className={classes.iconsWrapperSecondary}
+                        className={classes.iconsWrapper}
                     >
                         <img src="/assets/logo.png" alt="logo" className={classes.logoIcons}/>
                     </Grid>
@@ -148,12 +137,12 @@ function AppFooter() {
                         </Typographic>
 
                         <Grid container direction="row" justify="flex-start">
-                            <Grid item className={classes.icons}>
+                            <Grid item>
                                 <a href="https://github.com/newForinux" className={classes.icons}>
                                     <img src="/assets/github.svg" alt="Github" />
                                 </a>
                             </Grid>
-                            <Grid item className={classes.icons}>
+                            <Grid item>
                                 <a href="https://github.com/Yessir-kim" className={classes.icons}>
                                     <img src="/assets/github.svg" alt="Github" />
                                 </a>
@@ -163,11 +152,16 @@ function AppFooter() {
                 </Grid>
                 
                 <Grid item>
-                    <Grid container direction="row" justify="flex-start">
-                        <Grid item className={classes.backgroundIcons}>
+                    <Grid 
+                        container
+                        direction="row"
+                        justify="flex-start"
+                        className={classes.iconsWrapper}
+                    >
+                        <Grid item>
                             <img src="/assets/hand.png" alt="Handong" className={classes.backgroundIcons}/>
                         </Grid>
-                        <Grid item className={classes.backgroundIcons}>
+                        <Grid item>
                             <img src="/assets/ISEL-t.png" alt="ISEL" className={classes.labIcons}/>
                         </Grid>
                     </Grid>
