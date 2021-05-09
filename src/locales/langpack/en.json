@@ -52,6 +52,8 @@
     "check.again.1": "Policy is successfully saved.",
     "check.again.2": "If you forgot the token, check it out one more time!",
 
+    "file transfer": "No files selected.",
+
     "policy.point": "Total score",
     "policy.count.methods": "Mininum number of methods",
     "policy.count.fields": "Minimum number of fields",
