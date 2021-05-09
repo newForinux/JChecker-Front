@@ -34,15 +34,15 @@ const useStyles = makeStyles((theme: Theme) => ({
         alignItems: 'center',
     },
     icons: {
-        minWidth: 15,
-        maxWidth: 25,
+        width: 15,
+        height: 15,
         [theme.breakpoints.up('sm')]: {
-            minWidth: 25,
-            maxWidth: 30,
+            width: 25,
+            hidth: 25,
         },
         [theme.breakpoints.up('xl')]: {
-            minWidth: 30,
-            maxWidth: 40,
+            width: 35,
+            hidth: 35,
         },
         display: 'flex',
         justifyContent: 'center',
