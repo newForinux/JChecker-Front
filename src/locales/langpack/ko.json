@@ -101,6 +101,7 @@
     "begin.enter generate contact": "클래스를 운영하고 싶으신가요? JCHECKER팀에게 연락 주세요!", 
 
     "result.score.success": "채점 완료!",
+    "result.score.delay": "제출 기한이 지나 감점되었습니다. (1일 = 1점)",
     "result.score.count": "지정된 필드, 메서드 개수 또는 (필요하다면) enhanced for문이 부족한 것 같습니다.",
     "result.score.class": "클래스 : 지정된 클래스가 없습니다.",
     "result.score.compile": "컴파일 : 컴파일에 문제가 있습니다.",

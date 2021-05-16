@@ -100,6 +100,7 @@
     "begin.enter generate contact": "Do you want to run a class? Please contact us, JCHECKER team.", 
 
     "result.score.success": "Scoring completed!",
+    "result.score.delay": "The score was deducted after the deadline (-1 per day).",
     "result.score.count": "The number of fields, methods or (if required) advanced for statements is insufficient.",
     "result.score.class": "Class : No specified classes.",
     "result.score.compile": "Compilation : There is a problem with the compilation.",
