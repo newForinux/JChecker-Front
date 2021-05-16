@@ -94,8 +94,9 @@ function ResultProcess (props : RouteComponentProps<RouteParamsProps>) {
     const existsInPolicy = {
         feedback: results.isDirect === 'true' ? true : false,
         count: results.count !== undefined ? (results.count.deductedPoint === 0 ? true : false) : undefined,
+        delay: results.delay !== undefined ? (results.delay.deductedPoint === 0 ? true : false) : undefined,
         compiled: results.compile !== undefined ? (results.compile.deductedPoint === 0 ? true : false) : undefined,
-        inputs: results.runtimeCompare !== undefined ? (results.runtimeCompare.deductedPoint === 0 ? true : false) : undefined,
+        inputs: results.oracle !== undefined ? (results.oracle.deductedPoint === 0 ? true : false) : undefined,
         classes: results.classes !== undefined ? (results.classes.deductedPoint === 0 ? true : false) : undefined,
         packages: results.packages !== undefined ? (results.packages.deductedPoint === 0 ? true : false) : undefined,
         custexc: results.customException !== undefined ? (results.customException.deductedPoint === 0 ? true : false) : undefined,
@@ -139,6 +140,14 @@ function ResultProcess (props : RouteComponentProps<RouteParamsProps>) {
                     </Typographic>
                 }
 
+
+                {existsInPolicy.feedback && existsInPolicy.delay === false &&
+                    <Typographic color="inherit" align="left" variant="subtitle1" className={classesStyle.h6}>
+                        <PlaylistAddCheckRoundedIcon color="error" /> &nbsp;
+                        (-{results.delay!.deductedPoint}) {t('result.score.delay')}
+                    </Typographic>
+                }
+
                 
                 {existsInPolicy.feedback && existsInPolicy.count === false &&
                     <Typographic color="inherit" align="left" variant="subtitle1" className={classesStyle.h6}>
@@ -166,7 +175,7 @@ function ResultProcess (props : RouteComponentProps<RouteParamsProps>) {
                 {existsInPolicy.feedback && existsInPolicy.inputs === false &&
                     <Typographic color="inherit" align="left" variant="subtitle1" className={classesStyle.h6}>
                         <PlaylistAddCheckRoundedIcon color="error" /> &nbsp;
-                        (-{results.runtimeCompare!.deductedPoint}) {t('result.score.testcase')}
+                        (-{results.oracle!.deductedPoint}) {t('result.score.testcase')}
                     </Typographic>
                 }
 

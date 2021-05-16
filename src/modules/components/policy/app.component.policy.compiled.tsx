@@ -1,12 +1,14 @@
 import { Button, 
+    Checkbox, 
     Dialog, 
     DialogActions, 
     DialogContent, 
     DialogContentText, 
     DialogTitle, 
+    FormControlLabel, 
     Grid, 
     TextField } from "@material-ui/core";
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next";
 import { DialogRawProp } from ".";
 
@@ -18,9 +20,11 @@ export default function CompiledDialog(props: DialogRawProp) {
     
     const [open, setOpen] = useState(isOpen);
     const [deduct, setDeduct] = useState(0);
+    const [gradle, setGradle] = useState(false);
     const [resCom, setResCom] = useState({
         state: false,
         deductPoint : 0,
+        buildTool: false,
     });
 
 
@@ -42,11 +46,16 @@ export default function CompiledDialog(props: DialogRawProp) {
     },[resCom]);
 
 
+    const handleChange = (e : React.ChangeEvent<HTMLInputElement>) => {
+        setGradle(e.target.checked);
+    }
+
 
     const handleClose = () => {
         setResCom({
             state: false,
             deductPoint : 0,
+            buildTool: false,
         });
         setOpen(false);
     }
@@ -56,6 +65,7 @@ export default function CompiledDialog(props: DialogRawProp) {
         setResCom({
             state: true,
             deductPoint : deduct,
+            buildTool: gradle,
         });
         setOpen(false);
     }
@@ -76,7 +86,13 @@ export default function CompiledDialog(props: DialogRawProp) {
             <DialogContentText>
                 {t('policy.compiled.2')}
             </DialogContentText>
-
+            <FormControlLabel
+                control={
+                    <Checkbox checked={gradle}
+                            onChange={handleChange}
+                            name="count" />}
+                label={t('policy.compiled.build')}
+            />
             <Grid container spacing={2}>
                 <Grid item>
                     <TextField

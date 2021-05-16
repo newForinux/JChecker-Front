@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@date-io/date-fns": "1.x",
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.3.0",
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
+    "@material-ui/pickers": "^3.3.10",
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^13.1.8",
@@ -18,6 +20,7 @@
     "@types/react-i18next": "^8.1.0",
     "axios": "^0.21.1",
     "clsx": "^1.1.1",
+    "date-fns": "^2.21.3",
     "i18next": "^20.2.2",
     "immer": "8.0.1",
     "react": "^17.0.2",
@@ -54,7 +57,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react-router-dom": "^5.1.7"
-  },
-  "proxy": "http://192.168.0.11:8787"
+    "@types/react-router-dom": "^5.1.7",
+    "postcss": "^8.2.15"
+  }
 }

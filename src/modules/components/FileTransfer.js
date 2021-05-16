@@ -4,6 +4,7 @@ import { CloudUpload } from '@material-ui/icons';
 import axios from 'axios';
 import { Backdrop, CircularProgress, makeStyles } from "@material-ui/core";
 import { blue } from '@material-ui/core/colors';
+import { useTranslation } from "react-i18next";
 
 
 
@@ -34,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 function FileTransfer (props) {
+    const { t } = useTranslation();
     const classes = useStyles();
     const [file, setfile] = useState(null);
     const [disabled, setdisabled] = useState(true);
@@ -88,7 +90,7 @@ function FileTransfer (props) {
     return (
         <div>
             <form onSubmit={upload} className={classes.form}>
-                <input accept="application/zip" type="file" onChange={fileChange} name="file" />      
+                <input accept="application/zip" type="file" onChange={fileChange} name="file" aria-labelledby = {t('file transfer')} />      
                 <div className={classes.wrapper}>
                     <Button type="submit" 
                             variant="contained" 

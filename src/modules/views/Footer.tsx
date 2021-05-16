@@ -24,33 +24,30 @@ const useStyles = makeStyles((theme: Theme) => ({
         color: theme.palette.common.white,
     },
     container: {
-        marginTop: theme.spacing(8),
+        marginTop: theme.spacing(5),
         marginBottom: theme.spacing(8),
         display: 'flex',
     },
-    iconsWrapper: {
-        height: 60,
-    },
-    iconsWrapperSecondary: {
+    logoWrapper: {
         height: 76,
         marginBottom: theme.spacing(1),
         alignItems: 'center',
     },
     icons: {
-        minWidth: 15,
-        maxWidth: 25,
+        width: 30,
+        height: 30,
         [theme.breakpoints.up('sm')]: {
-            minWidth: 25,
-            maxWidth: 30,
+            width: 40,
+            hidth: 40,
         },
         [theme.breakpoints.up('xl')]: {
-            minWidth: 30,
-            maxWidth: 40,
+            width: 55,
+            hidth: 55,
         },
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center',
-        marginRight: theme.spacing(1),
+        marginTop: theme.spacing(2),
+        marginRight: theme.spacing(3),
     },
     logoIcons: {
         maxWidth: 180,
@@ -96,15 +93,6 @@ const useStyles = makeStyles((theme: Theme) => ({
         display: 'flex',
         justifyContent: 'center',
     },
-    list: {
-        margin: 0,
-        listStyle: 'none',
-        padding: 0,
-    },
-    listItem: {
-        paddingTop: theme.spacing(0.5),
-        paddingBottom: theme.spacing(0.5),
-    },
     white: {
         color: theme.palette.common.white,
     }
@@ -124,7 +112,7 @@ function AppFooter() {
                         container
                         direction='row'
                         justify="flex-start"
-                        className={classes.iconsWrapperSecondary}
+                        className={classes.logoWrapper}
                     >
                         <img src="/assets/logo.png" alt="logo" className={classes.logoIcons}/>
                     </Grid>
@@ -147,15 +135,19 @@ function AppFooter() {
                             </Link>
                         </Typographic>
 
-                        <Grid container direction="row" justify="flex-start">
-                            <Grid item className={classes.icons}>
-                                <a href="https://github.com/newForinux" className={classes.icons}>
-                                    <img src="/assets/github.svg" alt="Github" />
+                        <Grid 
+                            container 
+                            direction="row" 
+                            justify="flex-start"
+                        >
+                            <Grid item>
+                                <a href="https://github.com/newForinux">
+                                    <img src="/assets/github.svg" alt="Github" className={classes.icons} />
                                 </a>
                             </Grid>
-                            <Grid item className={classes.icons}>
-                                <a href="https://github.com/Yessir-kim" className={classes.icons}>
-                                    <img src="/assets/github.svg" alt="Github" />
+                            <Grid item>
+                                <a href="https://github.com/Yessir-kim">
+                                    <img src="/assets/github.svg" alt="Github" className={classes.icons} />
                                 </a>
                             </Grid>
                         </Grid>
@@ -163,11 +155,16 @@ function AppFooter() {
                 </Grid>
                 
                 <Grid item>
-                    <Grid container direction="row" justify="flex-start">
-                        <Grid item className={classes.backgroundIcons}>
+                    <Grid 
+                        container
+                        direction="row"
+                        justify="flex-start"
+                        className={classes.logoWrapper}
+                    >
+                        <Grid item>
                             <img src="/assets/hand.png" alt="Handong" className={classes.backgroundIcons}/>
                         </Grid>
-                        <Grid item className={classes.backgroundIcons}>
+                        <Grid item>
                             <img src="/assets/ISEL-t.png" alt="ISEL" className={classes.labIcons}/>
                         </Grid>
                     </Grid>

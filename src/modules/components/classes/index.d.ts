@@ -31,10 +31,13 @@ export interface GradingResultProps {
     count: {
         deductedPoint: number,
     } | undefined,
+    delay: {
+        deductedPoint: number,
+    } | undefined,
     compile: {
         deductedPoint: number,
     } | undefined,
-    runtimeCompare: {
+    oracle: {
         deductedPoint: number,
     } | undefined,
     classes: {

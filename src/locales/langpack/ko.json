@@ -17,8 +17,8 @@
     "detail.1.2": "제출 방식은 .zip 또는 Github URL이 될 수 있습니다.",
     "detail.2.1": "정적 분석 및 채점 기준,",
     "detail.2.2": "여러 테스트 케이스로 제출된 과제를 채점합니다.",
-    "detail.3.1": "도표를 활용해", 
-    "detail.3.2": "채점 결과를 시각화합니다.",
+    "detail.3.1": "피드백을 제공해", 
+    "detail.3.2": "채점 결과를 설명합니다.",
 
     "error.1": "요청을 처리할 수 없습니다...",
     "error.2": "잘못된 파일 형식, 채점 서버 오류, 또는 잘못된 주소 요청일 수 있습니다.",
@@ -49,9 +49,12 @@
     "instructor name": "개설자 이름",
 
     "dialog.1": "채점 기준",
-    "dialog.2": "정적 분석을 통해 검사할 항목을 선택할 수 있습니다.",
+    "dialog.2": "정적 분석 및 테스트 오라클 사용을 위해 검사할 항목을 선택할 수 있습니다.",
+    "dialog.deadline": "제출 기한",
     "check.again.1": "채점 기준이 저장되었습니다!",
     "check.again.2": "혹시 토큰을 잊으셨다면, 한 번 더 확인하세요!",
+
+    "file transfer": "선택된 파일이 없습니다.",
     
     "policy.point": "총점",
     "policy.count.methods": "최소 메서드 개수",
@@ -66,6 +69,7 @@
     "policy.class.2": "필수로 구현해야 할 클래스가 있나요?",
     "policy.compiled.1": "컴파일 여부",
     "policy.compiled.2": "채점의 기본, 컴파일은 반드시 되어야 하겠죠?",
+    "policy.compiled.build": "빌드 툴을 사용해서 컴파일",
     "policy.custom.ds.1": "사용자 정의 자료구조 클래스",
     "policy.custom.ds.2": "사용자가 직접 정의한 자료구조 클래스가 필요한가요?",
     "policy.custom.ex.1": "사용자 정의 예외처리 클래스",
@@ -97,6 +101,7 @@
     "begin.enter generate contact": "클래스를 운영하고 싶으신가요? JCHECKER팀에게 연락 주세요!", 
 
     "result.score.success": "채점 완료!",
+    "result.score.delay": "제출 기한이 지나 감점되었습니다. (1일 = 1점)",
     "result.score.count": "지정된 필드, 메서드 개수 또는 (필요하다면) enhanced for문이 부족한 것 같습니다.",
     "result.score.class": "클래스 : 지정된 클래스가 없습니다.",
     "result.score.compile": "컴파일 : 컴파일에 문제가 있습니다.",
