@@ -15,14 +15,10 @@ const styles = (theme: Theme) => createStyles ({
         position: 'relative',
         display: 'flex',
         alignItems: 'center',
-        height: '95vh',
-        minHeight: 300,
-        maxHeight: 800,
-        [theme.breakpoints.up('sm')]: {
-            height: '80vh',
-            minHeight: 500,
-            maxHeight: 1300,
-        },
+        height: '90vh',
+        [theme.breakpoints.up('md')]: {
+            height: '85vh',
+        }
     },
     container: {
         marginTop: theme.spacing(3),

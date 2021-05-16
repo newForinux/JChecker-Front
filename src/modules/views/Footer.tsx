@@ -24,9 +24,9 @@ const useStyles = makeStyles((theme: Theme) => ({
         color: theme.palette.common.white,
     },
     container: {
-        marginTop: theme.spacing(8),
+        marginTop: theme.spacing(5),
         marginBottom: theme.spacing(8),
-        display: 'static',
+        display: 'flex',
     },
     logoWrapper: {
         height: 76,

@@ -58,6 +58,9 @@ const useStyles = makeStyles((theme: Theme) => ({
             maxWidth: 300,
         },
     },
+    table: {
+        width: '100%',
+    }
 }));
 
 
@@ -75,7 +78,7 @@ const useStylesLayout = makeStyles((theme: Theme) => ({
 }));
 
 
-function EachClass(props: RouteComponentProps<RouteParamsProps>) {
+function ClassForInst (props: RouteComponentProps<RouteParamsProps>) {
     const classesStyle = useStyles();
     const classesLayout = useStylesLayout();
 
@@ -194,4 +197,4 @@ function EachClass(props: RouteComponentProps<RouteParamsProps>) {
 }
 
 
-export default React.memo(WithRoot(EachClass));
+export default React.memo(WithRoot(ClassForInst));
