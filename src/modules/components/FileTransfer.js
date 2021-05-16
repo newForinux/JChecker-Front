@@ -90,7 +90,7 @@ function FileTransfer (props) {
     return (
         <div>
             <form onSubmit={upload} className={classes.form}>
-                <input accept="application/zip" type="file" onChange={fileChange} name="file" aria-label= {t('file transfer')} />      
+                <input accept="application/zip" type="file" onChange={fileChange} name="file" aria-labelledby = {t('file transfer')} />      
                 <div className={classes.wrapper}>
                     <Button type="submit" 
                             variant="contained" 
