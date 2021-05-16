@@ -1,4 +1,4 @@
-import { Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControlLabel, FormGroup, TextField } from "@material-ui/core";
+import { Backdrop, Button, Checkbox, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControlLabel, FormGroup, Grid, makeStyles, TextField, Theme } from "@material-ui/core";
 import axios from "axios";
 import produce from "immer";
 
@@ -19,6 +19,8 @@ import OverridingDialog from "./policy/app.component.policy.ovr";
 import PackageDialog from "./policy/app.component.policy.package";
 import SuperclassDialog from "./policy/app.component.policy.super";
 import ThreadDialog from "./policy/app.component.policy.thread";
+import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import DateFnsUtils from "@date-io/date-fns"
 
 
 interface PolicyProps {
@@ -30,10 +32,18 @@ interface PolicyProps {
     isDirect: boolean,
 };
 
+const useStyles = makeStyles((theme: Theme) => ({
+    backdrop: {
+        zIndex: theme.zIndex.drawer + 1,
+        color: '#fff',
+    },
+  }));
+
 
 export default function SelectCond(props: PolicyProps) {
 
-    const { t } = useTranslation(); 
+    const { t } = useTranslation();
+    const classes = useStyles();
 
     const initial_state = {
         className: props.className,
@@ -65,6 +75,7 @@ export default function SelectCond(props: PolicyProps) {
         token: props.token,
         itoken: props.itoken,
         point: 0,
+        dueDate: new Date(),
         count: { state: false } as Object,
         compiled: { state: false } as Object,
         oracle: { state: false } as Object,
@@ -85,6 +96,8 @@ export default function SelectCond(props: PolicyProps) {
     const [policy, setPolicy] = useState(initial_data);
     const [state, setState] = useState(initial_state);
     const [submitted, setSubmitted] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
 
     const handleClose = () => {
         setOpen(false);
@@ -94,6 +107,33 @@ export default function SelectCond(props: PolicyProps) {
 
     const handleSubmittedClose = () => {
         setSubmitted(false);
+    }
+
+
+    const handleDateChange = (date: Date | null) => {
+        setSelectedDate(date);
+ 
+
+        if (date !== null) {
+            let _YEAR = date?.getFullYear();
+            let month = (1 + date?.getMonth());
+            let _MONTH = month >= 10 ? month.toString() : '0' + month.toString();
+            let day = date.getDate();
+            let _DAY = day >= 10 ? day.toString() : '0' + day.toString();
+            let hour = date.getHours();
+            let _HOUR = hour >= 10 ? hour.toString() : '0' + hour.toString();
+            let minute = date.getMinutes();
+            let _MINUTE = minute >= 10 ? minute.toString() : '0' + minute.toString();
+            let _SECOND = '59';
+
+            let _DATE = _YEAR + '-' + _MONTH + '-' + _DAY + ' ' + _HOUR + ':' + _MINUTE + ':' + _SECOND;
+
+            setPolicy(
+                produce(draft => {
+                    draft['dueDate'] = _DATE;
+                })
+            );
+        }
     }
 
 
@@ -124,13 +164,17 @@ export default function SelectCond(props: PolicyProps) {
 
     
     const handleSubmit = () => {
+        setLoading(true);
+
         axios.post("http://isel.lifove.net/api/token/save", JSON.stringify(policy, null, 2), {
         // axios.post("/api/token/save", JSON.stringify(policy, null, 2), {    
             headers: {"Content-Type": 'application/json'}
         }).then((res) => {
             setOpen(false);
             setState(initial_state);
+            setPolicy(initial_data);
             setSubmitted(true);
+            setLoading(false);
         })
 
         console.log( JSON.stringify(policy, null, 2) );
@@ -145,7 +189,7 @@ export default function SelectCond(props: PolicyProps) {
                     aria-labelledby="form-dialog-title"
                     disableBackdropClick={true}
                     disableEscapeKeyDown={true}
-                    maxWidth="md"
+                    maxWidth="sm"
                     scroll='paper'
                 >
                 <DialogTitle id="form-dialog-title">{t('dialog.1')}</DialogTitle>
@@ -153,14 +197,30 @@ export default function SelectCond(props: PolicyProps) {
                 <DialogContentText>
                     {t('dialog.2')}
                 </DialogContentText>
-                    <TextField
-                        type="number"
-                        value={policy.point}
-                        label={t('policy.point')}
-                        size="small"
-                        margin="dense"
-                        onChange={e => setPolicy({ ...policy, point: (parseFloat(e.target.value) || policy.point)})}
-                    />
+                    <Grid container spacing={2}>
+                        <Grid item>
+                            <TextField
+                                size="medium"
+                                type="number"
+                                margin="normal"
+                                value={policy.point}
+                                label={t('policy.point')}
+                                onChange={e => setPolicy({ ...policy, point: (parseFloat(e.target.value) || policy.point)})}
+                            />
+                        </Grid>
+                        <Grid item>
+                            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                <DateTimePicker 
+                                    size="medium"
+                                    margin="normal"
+                                    format="yyyy/MM/dd hh:mm a"
+                                    value={selectedDate}
+                                    label={t('dialog.deadline')}
+                                    onChange={handleDateChange}
+                                />
+                            </MuiPickersUtilsProvider>
+                        </Grid>
+                    </Grid>
                     <FormGroup>
                         <FormControlLabel
                             control={
@@ -319,6 +379,11 @@ export default function SelectCond(props: PolicyProps) {
                 {state.encapsulation &&
                     <EncapDialog open={state.encapsulation} onCreate={handleCreate} keepMounted />}
 
+                {loading && 
+                    <Backdrop open={loading} className={classes.backdrop}>
+                        <CircularProgress color="inherit" />
+                    </Backdrop>            
+                }
                 </Dialog>
             }
 
