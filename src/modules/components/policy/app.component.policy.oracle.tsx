@@ -145,7 +145,7 @@ export default function OracleDialog(props: DialogRawProp) {
             </DialogContentText>
 
             <Grid container spacing={2}>
-                <Grid item>   
+                <Grid item>
                     <TextField
                         type="number"
                         value={deduct}
