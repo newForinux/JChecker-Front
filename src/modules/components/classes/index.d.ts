@@ -22,10 +22,33 @@ export interface ClassroomInstProps {
     createDate: string,
 }
 
+export interface ClassroomInstTokenProps {
+    itoken: string,
+}
+
+export type Order = 'asc' | 'desc';
+
+export interface EnhancedTableProps {
+    order: Order,
+    orderBy: string,
+    rowCount: number,
+    keyGroup: string[],
+    onRequestSort: (event: React.MouseEvent<unknown>, property: keyof ResultKeyProps) => void,
+}
+
+export interface ResultKeyProps {
+    studentNum: string,
+    result: number,
+}
 
 export interface GradingResultProps {
+    [key: string]: GradingResultProps,
+    id: string,
+    token: string,
     isDirect: string,
     studentNum: string,
+    className: string,
+    gradingDate: string,
     result: number,
     point: number,
     count: {

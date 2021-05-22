@@ -66,13 +66,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const useStylesLayout = makeStyles((theme: Theme) => ({
     root: {
-        height: '100vh',
-        minHeight: 500,
-        maxHeight: 800,
+        height: '120vh',
+        // minHeight: 500,
+        // maxHeight: 800,
         [theme.breakpoints.up('sm')]: {
-            height: '100vh',
-            minHeight: 800,
-            maxHeight: 1300,
+            height: '150vh',
+            // minHeight: 800,
+            // maxHeight: 1300,
         },
     },
 }));
@@ -91,26 +91,6 @@ function ClassForInst (props: RouteComponentProps<RouteParamsProps>) {
 
 
     const [classroom, setClassroom] = useState(initial);
-    const [load, setLoad] = useState(false);
-    const [dataGroup, setDataGroup] = useState<Object[]>( [] );
-    const [keyGroup, setKeyGroup] = useState<Object[]>( [] );
-
-    const handleLoad = () => {
-        setLoad(true);
-    }
-
-    function clean (obj: Object[]) {
-        for (var keys in obj) {
-            if (keys === 'id' || keys === 'isDirect' || keys === 'token')
-                delete obj[keys];
-
-            if (obj[keys] === null || obj[keys] === undefined) {
-                delete obj[keys];
-            }
-        }
-
-        return obj;
-    }
 
 
     useEffect(() => {
@@ -123,15 +103,6 @@ function ClassForInst (props: RouteComponentProps<RouteParamsProps>) {
                 });
             };
 
-            const getGradingData = async () => {
-                return await axios.get('/api/grade/', {
-                    params: {
-                        itoken: props.match.params.token
-                    },
-                }).then((response) => {
-                    return response.data;
-                });
-            }
 
             currentClassroomState()
             .then(response => {
@@ -140,26 +111,10 @@ function ClassForInst (props: RouteComponentProps<RouteParamsProps>) {
                     props.history.push('/jchecker');
                     alert("클래스가 없습니다.😅");
                 }
-                
-                getGradingData()
-                .then((response) => {
-                    var i = 0;
-                    for (; i < response.length; i++) {
-                        const element = clean(response[i]);
-
-                        if (i === 0) {
-                            setKeyGroup(Object.keys(element));
-                        }
-
-                        setDataGroup(old => [ ...old, element]);
-                    }
-
-                    handleLoad();
-                })
             })
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[classroom, load]);
+    },[classroom]);
 
 
     return (
@@ -183,7 +138,7 @@ function ClassForInst (props: RouteComponentProps<RouteParamsProps>) {
                     {classroom.className}
                 </Typographic>
                 
-                {load && <SectionTable pre={keyGroup} values={dataGroup} />}
+                <SectionTable itoken={classroom.itoken} />
 
                 <Typographic color="inherit" align="center" variant="h5" className={classesStyle.h5}>
                     opened by <b>{classroom.instructor}</b> on {classroom.createDate}
